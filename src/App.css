@@ -1,0 +1,10 @@
+.how-to-play {
+  width: 40vw;
+}
+
+/* Phones */
+@media (max-width: 1200px) {
+  .how-to-play {
+    width: 100%;
+  }
+}
