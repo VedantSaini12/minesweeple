@@ -1,15 +1,13 @@
-import { formatTime } from '../logic/format'
-import type { DailyResult } from '../logic/daily'
 import { Button, Card, Container } from 'react-bootstrap'
 
 type Props = {
   theme: 'light' | 'dark'
   onToggle: () => void
-  onPlay: (mode: 'daily' | 'practice') => void
-  todayResult: DailyResult | null
+  onPlay: () => void
   puzzleNo: number
 }
-export default function Landing({ theme, onToggle, onPlay, todayResult, puzzleNo }: Props) {
+
+export default function Landing({ theme, onToggle, onPlay, puzzleNo }: Props) {
   return (
     <Container className="py-4 font-monospace">
       {/* Theme button in the top-left */}
@@ -27,20 +25,11 @@ export default function Landing({ theme, onToggle, onPlay, todayResult, puzzleNo
       {/* Play button centered */}
       
       <div className="mt-4 d-flex flex-column align-items-center gap-2">
-  <Button
-    className="font-monospace play-button"
-    variant="success"
-    size="lg"
-    disabled={!!todayResult}
-    onClick={() => onPlay('daily')}
-  >
-    {todayResult
-      ? `${todayResult.won ? '✅' : '❌'} Daily #${puzzleNo} done · ${formatTime(todayResult.timeMs)}`
-      : `▶️ Play daily #${puzzleNo}`}
+      <div className="mt-4">
+  <Button className="font-monospace play-button" variant="success" size="lg" onClick={onPlay}>
+    ▶️ Play daily #{puzzleNo}
   </Button>
-  <Button variant="outline-secondary" className="font-monospace" onClick={() => onPlay('practice')}>
-    Practice (random word)
-  </Button>
+</div>
 </div>
 
 

@@ -66,16 +66,22 @@ export function LegendCompact() {
             </span>
           ))}
         </div>
-        <Button
-          variant="outline-secondary"
-          size="sm"
-          className="position-absolute top-50 end-0 translate-middle-y"
-          onClick={() => setOpen(o => !o)}
-          aria-expanded={open}
-          aria-label="Explain tile colours"
-        >
-          ?
-        </Button>
+          <Button
+    variant="outline-secondary"
+    size="sm"
+    className="position-absolute top-50 end-0 translate-middle-y d-flex align-items-center"
+    onClick={() => setOpen(o => !o)}
+    aria-expanded={open}
+    aria-label={open ? 'Hide tile colour guide' : 'Show tile colour guide'}
+  >
+    <svg
+      width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+      style={{ transition: 'transform .2s', transform: open ? 'rotate(180deg)' : 'none' }}
+    >
+      <path d="M3 6l5 5 5-5" />
+    </svg>
+  </Button>
       </div>
       <Collapse in={open}>
         <div>
