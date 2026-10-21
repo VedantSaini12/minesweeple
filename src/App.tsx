@@ -6,7 +6,9 @@ import Timer from './components/Timer'
 import Grid from './components/Grid'
 import GuessArea from './components/GuessArea'
 import { newPuzzle, type Puzzle } from './logic/puzzle'
-import { score, type Guess } from './logic/score'
+import { score, type Guess } from './logic/score.ts'
+import ResultModal from './components/Modal'
+import Legend, {LegendCompact} from './components/Legend.tsx'
 import { formatTime } from './logic/format'
 
 const MAX_PROBES = 12
@@ -32,12 +34,14 @@ export default function App() {
   const [guesses, setGuesses] = useState<Guess[]>([])
   const [startTime, setStartTime] = useState(0)
   const [finalTime, setFinalTime] = useState(0)
+  const [showModal, setShowModal] = useState(false)
 
   const start = () => {
     setPuzzle(newPuzzle())
     setRevealed(new Set())
     setGuesses([])
     setStartTime(Date.now())
+    setShowModal(false)
     setPhase('playing')
   }
 
@@ -54,6 +58,7 @@ export default function App() {
     if (won || next.length >= MAX_GUESSES) {
       setFinalTime(Date.now() - startTime)
       setPhase(won ? 'won' : 'lost')
+      setShowModal(true)
     }
   }
 
@@ -85,9 +90,14 @@ export default function App() {
               </div>
             </div>
 
-            <Grid letters={puzzle.letters} targets={puzzle.targets} revealed={revealed} onProbe={probe} />
-            <GuessArea guesses={guesses} maxGuesses={MAX_GUESSES} disabled={!playing} onGuess={guess} />
-
+            <div className="d-flex justify-content-center align-items-start gap-4">
+              <div style={{ flex: '0 1 420px', width: '100%' }}>
+                <LegendCompact />
+                <Grid letters={puzzle.letters} targets={puzzle.targets} revealed={revealed} onProbe={probe} />
+                <GuessArea guesses={guesses} maxGuesses={MAX_GUESSES} disabled={!playing} onGuess={guess} />
+              </div>
+              <Legend />
+            </div>
             {!playing && (
               <div className="text-center mt-4">
                 <Button onClick={start}>Play again</Button>
@@ -96,6 +106,14 @@ export default function App() {
           </>
         )}
 
+        <ResultModal
+          show={showModal}
+          won={phase === 'won'}
+          time={formatTime(finalTime)}
+          secret={puzzle?.secret ?? ''}
+          onPlayAgain={start}
+          onClose={() => setShowModal(false)}
+        />
       </Container>
     </>
   )

@@ -43,16 +43,16 @@ export default function Landing({ theme, onToggle, onPlay }: Props) {
         <Card.Header as="h5">How to play</Card.Header>
         <Card.Body>
           <ol className="mb-0">
-            <li>Five of the 25 letters spell a secret word, in scrambled order.</li>
+            <li>Five of the 36 tiles spell a secret word, in scrambled order.</li>
             <li>
               Tap a tile to probe it. The number shows how many of its 8
               neighbours are secret letters.<br></br>
-              🟩 ⟶ Wordle contains the letter <br></br>
-              🟨 ⟶ A neighbour contains a wordle letter <br></br>
-              ⬛ ⟶ No neighbours nor itself is part of the wordle
+              🟩 ⟶ This tile is one of the five secret tiles <br />
+              🟨 ⟶ Not a secret tile, but some neighbours are. The letter can <b>STILL</b> be part of the Wordle<br />
+              ⬛ ⟶ Not a secret tile, and none are next to it
             </li>
             <li>
-              You have 10 probes. Then guess the word in 3 tries, the usual Worlde style.
+              You have 12 probes. Then guess the word in 3 tries, the usual Wordle style.
             </li>
             <li>The clock starts when you press Play.</li>
           </ol>

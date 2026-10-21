@@ -33,7 +33,7 @@ export default function GuessArea({ guesses, maxGuesses, disabled, onGuess }: Pr
           onChange={e => setValue(e.target.value.toUpperCase())}
           onKeyDown={e => e.key === 'Enter' && submit()}
         />
-        <Button onClick={submit} disabled={disabled}>Guess</Button>
+        <Button className='btn btn-success' onClick={submit} disabled={disabled}>Guess</Button>
       </InputGroup>
       <div className="text-body-secondary small mt-1">{maxGuesses - guesses.length} guesses left</div>
     </div>
