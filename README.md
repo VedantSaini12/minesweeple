@@ -15,7 +15,7 @@
    - 🟨 **Yellow:** not secret, but a secret tile is next to it.
    - ⬛ **Gray:** not secret, and none are next to it.
 3. Decoy tiles can repeat a letter from the word, so a yellow or gray tile's letter can still be in the answer.
-4. You get **10 probes**. Then guess the word in **3 tries**, with the usual Wordle colours.
+4. You get **12 probes**. Then guess the word in **3 tries**, with the usual Wordle colours.
 5. Guesses must be real words. A rejected guess doesn't cost a try.
 6. Flag tiles you suspect (🚩 button, or right-click). Flags are free and unlimited.
 7. A timer runs from the moment you press Play.
@@ -91,8 +91,6 @@ node scripts/fetch-valid.mjs     # writes src/data/valid.json
 
 > Don't change `words.json` after launch: it changes which word each day maps to.
 
-In dev mode, a **Reset daily** button appears at the bottom of the daily page for testing. It is hidden in production builds.
-
 ## Deployment
 
 The site is deployed on Netlify from this repo.
@@ -101,18 +99,10 @@ The site is deployed on Netlify from this repo.
 - Publish directory: `dist`
 - `public/_redirects` contains `/* /index.html 200` so direct links to `/random` work
 
-## Limitations
-
-- State lives in `localStorage`, so progress doesn't sync across devices, and clearing storage resets it.
-- The daily rolls over at each player's local midnight, so players in different time zones can briefly be on different puzzles.
-- With no backend there are no accounts or leaderboards.
-
 ## Ideas for later
 
 - Streaks and a stats screen
-- Shareable emoji result
-- Global leaderboard (would need a backend)
-- Unit tests for scoring and seeding
+- Global leaderboard
 
 ## Credits
 
