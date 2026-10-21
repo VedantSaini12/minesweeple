@@ -59,8 +59,9 @@ export default function Landing({ theme, onToggle, onPlay, todayResult, puzzleNo
               🟨 ⟶ Not a secret tile, but some neighbours are. The letter can <b>STILL</b> be part of the Wordle<br />
               ⬛ ⟶ Not a secret tile, and none are next to it
             </li>
+            <li>Flag tiles you think are secret (🚩 button, or right-click).</li>
             <li>
-              You have 12 probes. Then guess the word in 3 tries, the usual Wordle style.
+              You have 10 probes. Then guess the word in 3 tries, the usual Wordle style.
             </li>
             <li>The clock starts when you press Play.</li>
           </ol>

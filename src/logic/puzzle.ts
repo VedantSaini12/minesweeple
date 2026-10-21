@@ -1,24 +1,49 @@
 const WORDS = ['crane','flint','ghost','plumb','stork','brave','charm','drift','eagle','grape',
   'haste','ivory','lemon','mango','noble','ocean','pearl','quilt','raven','siren','tiger',
   'vivid','waltz','yacht','blaze','cloud','dance','ember','flame','glide','honey','laser']
-const DECOYS = 'EEEEAAARRIIOOTTNNSSLLCUDPMHGBFYWKVXZJQ'
-const SIZE = 6
+
+export const SIZE = 6
 const CELLS = SIZE * SIZE
+const DECOYS = 'EEEEAAARRIIOOTTNNSSLLCUDPMHGBFYWKVXZJQ'
+const LAUNCH = '2026-10-21'
 
 export interface Puzzle { secret: string; letters: string[]; targets: number[] }
 
-export function newPuzzle(): Puzzle {
-  const secret = (WORDS as string[])[Math.floor(Math.random() * WORDS.length)].toUpperCase()
+function mulberry32(a: number) {
+  return () => {
+    a |= 0; a = (a + 0x6d2b79f5) | 0
+    let t = Math.imul(a ^ (a >>> 15), 1 | a)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+function hash(s: string) {
+  let h = 2166136261
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) }
+  return h >>> 0
+}
+
+export const todayKey = (d = new Date()) => d.toLocaleDateString('en-CA') // YYYY-MM-DD, local time
+
+export const puzzleNumber = (key: string) =>
+  Math.floor((Date.parse(key) - Date.parse(LAUNCH)) / 864e5) + 1
+
+export function newPuzzle(seed?: number): Puzzle {
+  const r = seed === undefined ? Math.random : mulberry32(seed)
+  const secret = (WORDS as string[])[Math.floor(r() * WORDS.length)].toUpperCase()
   const idx = [...Array(CELLS).keys()]
   for (let i = CELLS - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
+    const j = Math.floor(r() * (i + 1))
     ;[idx[i], idx[j]] = [idx[j], idx[i]]
   }
   const targets = idx.slice(0, 5)
-  const letters = Array.from({ length: CELLS }, () => DECOYS[Math.floor(Math.random() * DECOYS.length)])
+  const letters = Array.from({ length: CELLS }, () => DECOYS[Math.floor(r() * DECOYS.length)])
   targets.forEach((t, k) => (letters[t] = secret[k]))
   return { secret, letters, targets }
 }
+
+export const dailyPuzzle = (key: string) => newPuzzle(hash('minesweeple-' + key))
 
 export function neighbourCount(targets: number[], i: number): number {
   const x = i % SIZE, y = Math.floor(i / SIZE)
@@ -31,4 +56,3 @@ export function neighbourCount(targets: number[], i: number): number {
     }
   return c
 }
-
