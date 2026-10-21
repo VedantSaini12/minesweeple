@@ -9,7 +9,7 @@
 
 ## How to play
 
-1. Five of the 25 letter tiles are the **secret tiles**. Together they spell a 5-letter word, in scrambled order.
+1. Five of the 36 letter tiles are the **secret tiles**. Together they spell a 5-letter word, in scrambled order.
 2. Tap a tile to **probe** it. The small number shows how many of its 8 neighbours are secret tiles.
    - 🟩 **Green:** this tile is one of the five secret tiles.
    - 🟨 **Yellow:** not secret, but a secret tile is next to it.
