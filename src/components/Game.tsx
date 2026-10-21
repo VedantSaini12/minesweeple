@@ -13,7 +13,7 @@ import { score, type Guess } from '../logic/score'
 import { formatTime } from '../logic/format'
 import { loadSaved, saveGame, saveResult } from '../logic/daily'
 
-const MAX_PROBES = 10
+const MAX_PROBES = 12
 const MAX_GUESSES = 3
 type Phase = 'idle' | 'playing' | 'won' | 'lost'
 type Props = { mode: 'daily' | 'random'; theme: 'light' | 'dark'; onToggle: () => void }

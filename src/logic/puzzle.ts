@@ -1,6 +1,4 @@
-const WORDS = ['crane','flint','ghost','plumb','stork','brave','charm','drift','eagle','grape',
-  'haste','ivory','lemon','mango','noble','ocean','pearl','quilt','raven','siren','tiger',
-  'vivid','waltz','yacht','blaze','cloud','dance','ember','flame','glide','honey','laser']
+import WORDS from '../data/words.json'
 
 export const SIZE = 6
 const CELLS = SIZE * SIZE

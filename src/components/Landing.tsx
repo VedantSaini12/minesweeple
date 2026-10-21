@@ -15,7 +15,7 @@ export default function Landing({ theme, onToggle, onPlay, puzzleNo }: Props) {
       <Button
         className="position-absolute top-0 start-0"
         variant="outline-secondary"
-        size="lg"
+        size="sm"
         onClick={onToggle}
         aria-label="Toggle theme"
       >
